@@ -1,0 +1,32 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Image tag to deploy (e.g., v1.0.0)'
+        required: true
+
+jobs:
+  to-vm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to VM via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            set -euo pipefail
+            IMAGE=ghcr.io/${{ github.repository }}:${{ github.event.inputs.image_tag }}
+            docker pull "$IMAGE"
+            docker stop webconnector || true
+            docker rm webconnector || true
+            docker run -d --name webconnector --restart unless-stopped \
+              -p 8080:8080 \
+              -e LISTEN_ADDR=:8080 \
+              -e ALLOWED_ORIGIN=${ALLOWED_ORIGIN:-} \
+              -e DATABASE_URL=${DATABASE_URL:-} \
+              "$IMAGE"
+
