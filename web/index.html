@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebConnector Rooms</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>WebConnector</h1>
+        <div class="room-controls">
+            <input id="displayName" placeholder="Your name" />
+            <input id="roomId" placeholder="Room ID" />
+            <button id="joinBtn">Join</button>
+            <button id="leaveBtn" disabled>Leave</button>
+        </div>
+    </header>
+
+    <section class="self-controls">
+        <div class="device-controls">
+            <button id="toggleAudio" class="toggle on" disabled>Mute</button>
+            <button id="toggleVideo" class="toggle on" disabled>Video Off</button>
+            <label class="inline">
+                <input type="checkbox" id="noiseSuppression" checked /> Noise suppression
+            </label>
+            <label class="inline">
+                <input type="checkbox" id="echoCancellation" checked /> Echo cancellation
+            </label>
+            <label class="inline">
+                <input type="checkbox" id="autoGainControl" checked /> Auto gain
+            </label>
+        </div>
+    </section>
+
+    <section class="videos" id="videos">
+        <div class="video-tile">
+            <video id="selfVideo" autoplay playsinline muted></video>
+            <div class="label" id="selfLabel">You</div>
+        </div>
+    </section>
+
+    <section class="chat">
+        <div class="chat-history" id="chatHistory"></div>
+        <form id="chatForm" class="chat-form">
+            <input id="chatInput" placeholder="Type a message..." maxlength="4000" />
+            <button id="chatSend" type="submit">Send</button>
+        </form>
+    </section>
+</div>
+
+<script src="/main.js"></script>
+</body>
+</html>
+
+

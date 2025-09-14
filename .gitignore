@@ -1,0 +1,36 @@
+# Binaries
+webconnector
+webconnector.exe
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Build artifacts
+/bin/
+/build/
+/dist/
+/tmp/
+
+# Environment and local config
+.env
+.env.*.local
+*.local
+
+# Logs
+*.log
+/logs/
+
+# Editors/IDE
+/.idea/
+/.vscode/
+
+# macOS
+.DS_Store
+
+# Node (if added later)
+/node_modules/
+
+
